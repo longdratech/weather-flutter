@@ -7,7 +7,7 @@ class CitySelection extends StatefulWidget {
 }
 
 class _CitySelectionState extends State<CitySelection> {
-  final TextEditingController _textController = TextEditingController();
+  final TextEditingController textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class _CitySelectionState extends State<CitySelection> {
               child: Padding(
                 padding: EdgeInsets.only(left: 10.0),
                 child: TextFormField(
-                  controller: _textController,
+                  controller: textController,
                   decoration: InputDecoration(
                     labelText: 'City',
                     hintText: 'Chicago',
@@ -33,7 +33,8 @@ class _CitySelectionState extends State<CitySelection> {
             IconButton(
               icon: Icon(Icons.search),
               onPressed: () {
-                Navigator.pop(context, _textController.text);
+                DataSearch();
+                Navigator.pop(context, textController.text);
               },
             )
           ],

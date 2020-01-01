@@ -29,22 +29,31 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: Colors.white,
       appBar: new AppBar(
         title: new Center(
           child: Text('Wheather Login'),
         ),
       ),
       body: Container(
+        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        constraints: BoxConstraints.expand(),
         child: ListView(
           children: <Widget>[
-            showLogo(),
-            progressWidget(),
-            formWidget(),
-            loginButtonWidget(),
-            errorWidget(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                showLogo(),
+                showText(),
+                progressWidget(),
+                formWidget(),
+                loginButtonWidget(),
+                errorWidget(),
+              ],
+            ),
           ],
         ),
-
       ),
     );
   }
@@ -69,15 +78,31 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
 
 //logo login
   Widget showLogo() {
-    return Container(
-      padding: EdgeInsets.only(top: 30),
-      height: 150,
-      width: 150,
-      child: Image.asset('assets/images/logo.png'),
+    return Padding(
+      padding: const EdgeInsets.only(top: 20,bottom: 30),
+      child: CircleAvatar(
+        backgroundColor: Color(0xffd8d8d8),
+        radius: 40,
+        child: FlutterLogo(),
+      ),
     );
   }
 
-//form login
+  Widget showText() {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 40),
+      child: Text(
+        'Hello\nWelcome back',
+        style: TextStyle(
+          fontSize: 30,
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  //form login
   Widget formWidget() {
     return Form(
       key: _formKey,
@@ -93,7 +118,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   //input email login
   Widget _emailWidget() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20.0, 50.0, 20.0, 0.0),
+      padding: const EdgeInsets.only(bottom: 25),
       child: TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,
@@ -102,7 +127,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             hintText: 'Nhập email',
             icon: new Icon(
               Icons.mail,
-              color: Colors.grey,
+              color: Color(0xff888888),
             )),
         validator: (value) =>
             value.isEmpty ? 'Email không được để trống' : null,
@@ -113,42 +138,52 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
 
   //input pass login
   Widget _passwordWidget() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 0.0),
-      child: new TextFormField(
-        maxLines: 1,
-        obscureText: true,
-        autofocus: false,
-        decoration: new InputDecoration(
-            hintText: 'Nhập mật khẩu',
-            icon: new Icon(
-              Icons.lock,
-              color: Colors.grey,
-            )),
-        validator: (value) =>
-            value.isEmpty ? 'Mật khẩu không được để trống' : null,
-        onSaved: (value) => _password = value.trim(),
-      ),
+    return Stack(
+      alignment: AlignmentDirectional.centerEnd,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 30),
+          child: new TextFormField(
+            maxLines: 1,
+            obscureText: true,
+            autofocus: false,
+            decoration: new InputDecoration(
+                hintText: 'Nhập mật khẩu',
+                icon: new Icon(
+                  Icons.lock,
+                  color: Color(0xff888888),
+                )),
+            validator: (value) =>
+                value.isEmpty ? 'Mật khẩu không được để trống' : null,
+            onSaved: (value) => _password = value.trim(),
+          ),
+        ),
+
+        /*IconButton(
+          icon: Icon(Icons.remove_red_eye),
+          onPressed: () => {},
+        ),*/
+      ],
     );
   }
 
   //login button
   Widget loginButtonWidget() {
     return new Container(
-        padding: EdgeInsets.fromLTRB(20.0, 45.0, 20.0, 0.0),
-        child: MaterialButton(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          elevation: 5.0,
-          minWidth: 400,
-          height: 55.0,
-          color: Colors.blue,
-          child: _formMode == FormMode.LOGIN
-              ? Text('Đăng nhập',
-                  style: TextStyle(fontSize: 20.0, color: Colors.white))
-              : null,
-          onPressed: _validateAndSubmit,
-        ));
+      padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 50.0),
+      child: MaterialButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        elevation: 5.0,
+        minWidth: 400,
+        height: 55.0,
+        color: Colors.blue,
+        child: _formMode == FormMode.LOGIN
+            ? Text('Đăng nhập',
+                style: TextStyle(fontSize: 20.0, color: Colors.white))
+            : null,
+        onPressed: _validateAndSubmit,
+      ),
+    );
   }
 
   void showLoginForm() {

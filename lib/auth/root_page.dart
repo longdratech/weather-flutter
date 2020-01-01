@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_wh/widgets/home_page.dart';
 import 'package:flutter_app_wh/widgets/weather.dart';
+
 import 'LoginPage.dart';
 import 'authentication.dart';
 

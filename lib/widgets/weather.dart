@@ -3,16 +3,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_wh/blocs/theme_bloc.dart';
 import 'package:flutter_app_wh/blocs/weather_bloc.dart';
-import 'package:flutter_app_wh/utils/search.dart';
 import 'package:flutter_app_wh/widgets/location.dart';
 import 'package:flutter_app_wh/widgets/settings.dart';
+import 'package:flutter_app_wh/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:search_widget/search_widget.dart';
 
-import 'city_selection.dart';
 import 'combined_weather_temperature.dart';
 import 'gradient_container.dart';
 import 'last_updated.dart';
-
 
 class Weather extends StatefulWidget {
   @override
@@ -48,7 +47,6 @@ class _WeatherState extends State<Weather> {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () async {
-              showSearch(context: context, delegate: DataSearch());
               final city = await Navigator.push(
                 context,
                 MaterialPageRoute(

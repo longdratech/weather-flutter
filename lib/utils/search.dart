@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class DataSearch extends SearchDelegate<String> {
-  final cities = ['HCM', 'Da Nang', 'Quy Nhon', 'Can Tho'];
+  final cities = ['Ho Chi Minh', 'London', 'chicago', 'Mexico'];
   final recentCities = ["HCM", "Da Nang"];
 
   @override
   List<Widget> buildActions(BuildContext context) {
-    return [IconButton(icon: Icon(Icons.clear), onPressed: () {})];
+    return [IconButton(icon: Icon(Icons.search), onPressed: () {})];
   }
 
   @override
@@ -23,18 +23,16 @@ class DataSearch extends SearchDelegate<String> {
   }
 
   @override
-  Widget buildResults(BuildContext context) {
-  }
+  Widget buildResults(BuildContext context) {}
 
   @override
   Widget buildSuggestions(BuildContext context) {
     final suggestionList = query.isEmpty ? recentCities : cities;
     return ListView.builder(
-      itemBuilder: (context, index) =>
-        ListTile(
-          leading: Icon(Icons.location_city),
-          title: Text(suggestionList[index]),
-        ),
+      itemBuilder: (context, index) => ListTile(
+        leading: Icon(Icons.location_city),
+        title: Text(suggestionList[index]),
+      ),
       itemCount: suggestionList.length,
     );
   }
