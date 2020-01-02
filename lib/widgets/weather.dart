@@ -7,7 +7,6 @@ import 'package:flutter_app_wh/widgets/location.dart';
 import 'package:flutter_app_wh/widgets/settings.dart';
 import 'package:flutter_app_wh/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:search_widget/search_widget.dart';
 
 import 'combined_weather_temperature.dart';
 import 'gradient_container.dart';
@@ -53,7 +52,6 @@ class _WeatherState extends State<Weather> {
                   builder: (context) => CitySelection(),
                 ),
               );
-
               if (city != null) {
                 BlocProvider.of<WeatherBloc>(context)
                     .add(FetchWeather(city: city));
